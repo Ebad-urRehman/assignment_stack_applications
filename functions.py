@@ -196,6 +196,7 @@ def get_list(size):
     list = []
     for i in range(size):
         list.append(int(input(f"Enter {i} element of array")))
+    return list
 
 def display_array(arr, size):
     for i in range(size):
@@ -206,23 +207,50 @@ def display_array(arr, size):
 def partition(arr, low, high):
     i = low - 1  # 0 low
     j = low  # size -1 high
+    high = high-1
     # last element as pivot
-    pivot = arr[high-1]
-    for j in range(low, high-1):
+    # print(f"i {i}")
+    # print(f"j {j}")
+    # print(f"arr[i] {arr[i]}")
+    # print(f"arr[j] {arr[j]}")
+
+    # high -= 1
+    # print(arr[high])
+    pivot = arr[high]
+    # print(f"pivot val {arr[high]}")
+    for j in range(low, high): #2
         if arr[j] <= pivot:
+            # print("i updated")
             i += 1
+            # print(i)
+            # print(f"before swap arr[i] {arr[i]} arr[j] {arr[j]}")
+            # print("ij swapped")
             arr[j], arr[i] = arr[i], arr[j]
+            # print(f"arr[]i {arr[i]} arr[j] {arr[j]}")
+
+    # print("i updated to swap with pivot")
     i += 1
-    arr[i], pivot = pivot, arr[j]
+    # print(i)
+    # print("i swapped with pivot")
+    # print(f"{arr[i]} and {pivot}")
+    arr[i], arr[high] = arr[high], arr[i]
+    # print(f"{arr[i]} and {pivot}")
+    # print(f"list is {arr}")
+    # print(f"next pivot is {i}")
     return i
 
 
 def quick_sort(arr, low, high):
+    # print(f"low {low}")
+    # print(f"high {high}")
+    # print(high)
     if low >= high:
+        # print(f"low when partion ended{low} and high {high}")
+        # print("partition retturned")
         return
     pivot = partition(arr, low, high)
-    low = pivot - 1
-    high = pivot + 1
+    # low = pivot - 1
+    # high = pivot + 1
     quick_sort(arr, low, pivot-1)
     quick_sort(arr, pivot+1, high)
 
